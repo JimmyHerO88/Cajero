@@ -1,5 +1,3 @@
-//let usuarioActual;
-
 const cuentas = [
     { email: 'mali@correo.com', password: 'mali123', nombre: 'Mali', numCuenta: '000123', saldo: 200 },
     { email: 'gera@correo.com', password: 'gera123', nombre: 'Gera', numCuenta: '000213',saldo: 290 },
@@ -48,25 +46,25 @@ function inicio(){
 
     document.getElementById("cuenta").innerHTML = 'Hola ' + '<strong>' + nombre + '</strong>' + ' Cuenta: ' + '<strong>' + cuenta + '</strong>';
 
-  }
+}
   
-  function vistaConsultar(){
-  
-    let consulta = document.getElementById("consulta-saldo");
-    let ingresar = document.getElementById("ingresar-monto");
-    let retirar = document.getElementById("retirar-monto");
+function vistaConsultar(){
 
-    let saldo = localStorage.getItem("saldo");    
-  
-    document.getElementById("saldo").innerHTML = "$ " + Number(saldo).toFixed(2);
+        let consulta = document.getElementById("consulta-saldo");
+        let ingresar = document.getElementById("ingresar-monto");
+        let retirar = document.getElementById("retirar-monto");
 
-    consulta.style.display = '';
-    ingresar.style.display = 'none';
-    retirar.style.display = 'none';
+        let saldo = Number(localStorage.getItem("saldo"));    
+    
+        document.getElementById("saldo").innerHTML = "$ " + saldo.toFixed(2);
+
+        consulta.style.display = '';
+        ingresar.style.display = 'none';
+        retirar.style.display = 'none';    
   
-  }
+}
   
-  function vistaIngresar(){
+function vistaIngresar(){
   
     let consulta = document.getElementById("consulta-saldo");
     let ingresar = document.getElementById("ingresar-monto");
@@ -75,10 +73,12 @@ function inicio(){
     consulta.style.display = 'none';
     ingresar.style.display = '';
     retirar.style.display = 'none';
+
+    document.getElementById("cantidadIngreso").value = "";
   
-  }
+}
   
-  function vistaRetirar(){
+function vistaRetirar(){
   
     let consulta = document.getElementById("consulta-saldo");
     let ingresar = document.getElementById("ingresar-monto");
@@ -87,17 +87,40 @@ function inicio(){
     consulta.style.display = 'none';
     ingresar.style.display = 'none';
     retirar.style.display = '';
-  
-  }
 
-  function nuevoIngreso(){
+    document.getElementById("cantidadRetiro").value = "";
+  
+}
+
+function nuevoIngreso(){
     let cantidad = document.getElementById("cantidadIngreso").value;
 
     cantidad = Number(cantidad);
     if(!isNaN(cantidad) && cantidad != null && cantidad != ""){
 
-        
+        let saldo = Number(localStorage.getItem("saldo")) + cantidad;
 
+        if(saldo > 990){
+            Swal.fire({
+                title: 'Error!',
+                text: 'La cantidad a ingresar sobrepasa el total que puedes tener en tu cuenta.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+                })
+            document.getElementById("cantidadIngreso").value = "";
+        }else{
+            Swal.fire({
+                icon: 'success',
+                title: 'Operación exitosa',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                
+                localStorage.setItem("saldo", saldo);
+                vistaConsultar();
+              })    
+        }        
+        
     }else{
         Swal.fire({
             title: 'Error!',
@@ -107,4 +130,44 @@ function inicio(){
             })
         document.getElementById("cantidadIngreso").value = "";
     }
-  }
+}
+
+function nuevoRetiro(){
+    let cantidad = document.getElementById("cantidadRetiro").value;
+
+    cantidad = Number(cantidad);
+    if(!isNaN(cantidad) && cantidad != null && cantidad != ""){
+
+        let saldo = Number(localStorage.getItem("saldo")) - cantidad;
+
+        if(saldo < 10){
+            Swal.fire({
+                title: 'Error!',
+                text: 'La cantidad a retirar sobrepasa el mínimo que puedes tener en tu cuenta.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+                })
+            document.getElementById("cantidadRetiro").value = "";
+        }else{
+            Swal.fire({
+                icon: 'success',
+                title: 'Operación exitosa',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                
+                localStorage.setItem("saldo", saldo);
+                vistaConsultar();
+              })    
+        }        
+        
+    }else{
+        Swal.fire({
+            title: 'Error!',
+            text: 'La cantidad que ingresaste es inválida, favor de verificar e intenta nuevamente',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+            })
+        document.getElementById("cantidadRetiro").value = "";
+    }
+}
