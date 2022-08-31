@@ -44,7 +44,7 @@ function inicio(){
     ingresar.style.display = 'none';
     retirar.style.display = 'none';
 
-    document.getElementById("cuenta").innerHTML = 'Hola ' + '<strong>' + nombre + '</strong>' + ' Cuenta: ' + '<strong>' + cuenta + '</strong>';
+    document.getElementById("cuenta").innerHTML = 'Hola ' + '<strong>' + nombre + '</strong>' + ' Cuenta: ' + '<strong>' + cuenta + '</strong><br><button type="button" class="salir" onclick="cerrarSesion()">Cerrar Sesion</button>';
 
 }
   
@@ -170,4 +170,8 @@ function nuevoRetiro(){
             })
         document.getElementById("cantidadRetiro").value = "";
     }
+}
+
+function cerrarSesion(){
+    window.location = 'index.html'; 
 }
