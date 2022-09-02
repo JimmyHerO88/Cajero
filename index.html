@@ -5,17 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Incluimos el JS del programa incluyendo la palabra reservada defer para que se cargue junto con el html-->
     <script defer src="cajero.js"></script>
+
+    <!--  Libreria para animaciones 
+         esta es el link de la libreria de animaciones https://animate.style/-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!--  Estilos CSS -->
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <form action="" class="form-box">
+        <!--  con esta clase se aplican los efectos de animacion class="animate__animated animate__flipInX" 
+            funciona incluyendo esto: animate__animated, seguido del nombre de la animacion en este caso: animate__flipInX  -->   
         <img src="img/BBVA-LOGO.png" class="animate__animated animate__flipInX" alt="logo BBVA">
         <h1 class="form-title">Ingresa tus datos</h1>
-        <input type="email" name="email" id="email" placeholder="Email">
-        <input type="password" name="password" id="password" placeholder="Contraseña">
-        <button type="button" onclick="login(true)">INGRESAR</button>
+        <input type="email" name="email" id="email" placeholder="Email"><!-- INPUT PARA EL CORREO DEL USUARIO -->
+        <input type="password" name="password" id="password" placeholder="Contraseña"><!-- INPUT PARA LA CONTRASEÑA -->
+        <button type="button" onclick="login(true)">INGRESAR</button><!-- BOTON PARA EJECUTAR LA FUNCION 'LOGIN' -->
     </form>
 </body>

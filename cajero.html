@@ -4,27 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ESTILOS CSS PARA ESTE HTML -->
     <link rel="stylesheet" href="cajero.css">
+    <!-- Libreria para iconos https://fontawesome.com/search
+    buscas los iconos disponibles en su version gratuita y copias el link para incluirlo de la siguiente manera:
+    <i class="icono fa-solid fa-wallet"></i> en las lineas 49, 50 y 51-->
     <script src="https://kit.fontawesome.com/dee10518ae.js" crossorigin="anonymous"></script>
+
+    <!-- Libreria para las alertas o swal con efectos e iconos en su version más reciente-->
     <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="cajero.js"></script>
+
+    <!-- Incluimos el JS del programa incluyendo la palabra reservada defer para que se cargue junto con el html-->
+    <script defer src="cajero.js"></script>
     <title>Cajero</title>
 </head>
 <body onload="inicio()">
     
     <div id="contenedor">
-        <header>
-            
+        <header>            
             <p><span><img src="img/BBVA-LOGO.png" alt=""></span> Cajero Automático</p>
         </header>
-        <nav id="cuenta">
-            
-        </nav>
+        <nav id="cuenta"></nav> <!-- En esta parte aparecerá el nombre de Usuario y su número de cuenta mediante la funcion Inicio y los document.getElementById -->
+
+        
+        <!-- El section se divide en 3 partes segun los requerimientos del proyecto 
+            Saldo disponible donde se incluirá el saldo del usuario según las operaciones que realice
+            Ingresar Monto y Retirar monto -->
         <section id="contenido">
+
             <div id="consulta-saldo">
                 <h2>Saldo disponible</h2>
-                <h3 id="saldo"></h3>
+                <h3 id="saldo"></h3><!-- Se mostrará el saldo mediante la funcion Inicio y los document.getElementById -->
             </div>
+
             <div id="ingresar-monto" class="ingresar-monto">
                 <form action="" class="form-box">
                     <label for="cantidadIngreso">Ingresar Monto</label>
@@ -32,6 +44,7 @@
                     <button type="button" onclick="nuevoIngreso()">INGRESAR</button>
                 </form>
             </div>
+
             <div id="retirar-monto">
                 <form action="" class="form-box">
                     <label for="cantidadRetiro">Retirar Monto</label>
@@ -39,6 +52,7 @@
                     <button type="button" onclick="nuevoRetiro()">RETIRAR</button>
                 </form>
             </div>
+
         </section>
         <aside>
             <p>OPCIONES</p>
